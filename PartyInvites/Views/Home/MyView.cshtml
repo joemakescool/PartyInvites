@@ -6,17 +6,21 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+
 </head>
 <body>
-    <div>
-        Hello World (from the view) <br /><br />
-        @ViewBag.Greeting 
+    <div class="text-center">
+        <p>
+            Hello! (from the view) <br /><br />
+            @ViewBag.Greeting
+        </p>
        <p>
-           We are going to have a party!!! <br />
-           (To Do: sell it better. Add pictures or something)
+           <h3>We are going to have a party!!!</h3> 
+           <h4>And you're invited!</h4>
        </p>
 
-        <a asp-action="RsvpForm">RSVP Now!</a>
+        <a class="btn btn-primary" asp-action="RsvpForm">RSVP Now!</a>
         
         
     </div>

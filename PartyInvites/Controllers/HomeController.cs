@@ -27,7 +27,20 @@ namespace PartyInvites.Controllers
         public ViewResult RsvpForm(GuestResponse guestResponse)
         {
             // TO DO: store response from guest
+            if (ModelState.IsValid)
+            {
+                Repository.AddResponse(guestResponse);
+                return View("Thanks", guestResponse);
+            }
+            else
+            {
+                // there is a validation error
+                return View("RsvpForm");
+            }
+
             Repository.AddResponse(guestResponse); //added to the model Respository made
+
+
             return View("Thanks", guestResponse); //passes info from guestResponse into the view
         }
 
