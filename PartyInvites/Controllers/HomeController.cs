@@ -10,34 +10,33 @@ namespace PartyInvites.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        public ViewResult Index()
         {
-            return View();
+            int hour = DateTime.Now.Hour;
+            ViewBag.Greeting = hour < 12 ? "Good Morning! :)" : "Good AfterNoon! :)";
+            return View("MyView");
         }
 
-        public IActionResult About()
+        [HttpGet]
+        public ViewResult RsvpForm()
         {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
+            return View("RsvpForm");
         }
 
-        public IActionResult Contact()
+        [HttpPost]
+        public ViewResult RsvpForm(GuestResponse guestResponse)
         {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
+            // TO DO: store response from guest
+            Repository.AddResponse(guestResponse); //added to the model Respository made
+            return View("Thanks", guestResponse); //passes info from guestResponse into the view
         }
 
-        public IActionResult Privacy()
+        public ViewResult ListResponses()
         {
-            return View();
+            return View("ListResponses", Repository.Responses.Where(r => r.WillAttend == true)); //LINK things
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+
+
     }
 }
